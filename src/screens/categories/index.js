@@ -1,11 +1,14 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, Button } from "react-native";
 import { styles } from "./styles";
 
-const Categories = () => {
+//Todas las vistas que este dentro del stack reciben el navigation, que contiene todos los métodos disponibles del stack de navegación
+//ej. el método navigate que nos dirige a las vistas disponibles
+const Categories = ({navigation}) => {
   return (
     <View style={styles.container}>
-      <Text>Categorías</Text>
+      <Text style={styles.title}>Categorías</Text>
+      <Button title="Ver productos" onPress={() => navigation.navigate("Products")}/>
     </View>
   );
 };

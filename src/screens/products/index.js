@@ -1,11 +1,12 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, Button } from "react-native";
 import { styles } from "./styles";
 
-const Productos = () => {
+const Productos = ({navigation}) => {
   return (
     <View style={styles.container}>
-      <Text>Productos</Text>
+      <Text style={styles.title}>Productos</Text>
+      <Button title="Ver detalles" onPress={() => navigation.navigate("Product")} />
     </View>
   );
 };
