@@ -1,6 +1,7 @@
 import { ActivityIndicator } from "react-native";
 import { useFonts } from "expo-font";
 import AppNavigator from "./src/navigation";
+import { styles } from "./styles";
 
 export default function App() {
   const [loaded] = useFonts({
@@ -11,7 +12,7 @@ export default function App() {
   });
 
   if (!loaded) {
-    return <ActivityIndicator size="large" color="#000" />
+    return <ActivityIndicator size="large" color="#000" style={styles.loader}/>
   }
 
   return (

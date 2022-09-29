@@ -1,12 +1,15 @@
 import React from "react";
-import { View, Text } from "react-native";
-import { styles } from "./styles";
+import { Item } from "../../components";
 
-const Product = () => {
+const Product = ({ route }) => {
+  const { description, price, title, weight } = route.params;
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Producto</Text>
-    </View>
+      <Item
+        description={description}
+        price={price}
+        title={title}
+        weight={weight}
+      />
   );
 };
 
