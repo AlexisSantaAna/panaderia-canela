@@ -4,9 +4,12 @@ import { colors } from "../../constants/themes";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
+    flexDirection: "row",
+    
     paddingHorizontal: 20,
     paddingVertical: 10,
+    alignItems: "center",
+    justifyContent: "space-between",
     backgroundColor: colors.secondary,
     margin: 10,
     borderRadius: 10,
@@ -21,19 +24,7 @@ export const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
   },
-  title: {
-    fontSize: 20,
-    textAlign: "center",
-    fontFamily: "Lato-Bold",
-  },
-  contentContainer: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingVertical: 18,
-  },
-  text: {
-    fontFamily: "Lato-Regular",
-  },
+  total: {
+    fontWeight: "bold"
+  }
 });
