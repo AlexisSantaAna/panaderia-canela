@@ -3,7 +3,12 @@ import { colors } from "../../constants/themes";
 
 export const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        backgroundColor: "#fff"
+    },
+    containerList: {
+        flex: 1,
+        backgroundColor: "#fff"
     },
     footer: {
         flex: 1,
@@ -19,5 +24,8 @@ export const styles = StyleSheet.create({
     },
     buttonConfirm: {
         fontFamily: "Lato-Bold"
+    },
+    buttonConfirmDisabled: {
+        color: "gray"
     }
 })

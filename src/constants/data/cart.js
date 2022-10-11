@@ -1,4 +1,4 @@
-export const CART = [
+export const cart = [
   {
     id: 1,
     category: 1,
@@ -19,38 +19,11 @@ export const CART = [
   },
   {
     id: 3,
-    category: 2,
-    title: "Pan Tostado",
-    description: "clasico pan tostado",
-    weight: "300gr",
-    price: 500,
-    quantity: 10,
-  },
-  {
-    id: 4,
-    category: 2,
-    title: "Pan Tostado",
-    description: "clasico pan tostado",
-    weight: "300gr",
-    price: 500,
-    quantity: 10,
-  },
-  {
-    id: 5,
-    category: 2,
-    title: "Pan Tostado",
-    description: "clasico pan tostado",
-    weight: "300gr",
-    price: 500,
-    quantity: 10,
-  },
-  {
-    id: 6,
-    category: 2,
-    title: "Pan Tostado",
-    description: "clasico pan tostado",
-    weight: "300gr",
-    price: 500,
-    quantity: 10,
+    category: 1,
+    title: "Pan de molde",
+    description: "clasico pan de molde",
+    weight: "400gr",
+    price: 100,
+    quantity: 5,
   },
 ];

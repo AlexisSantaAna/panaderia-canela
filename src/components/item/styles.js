@@ -32,4 +32,7 @@ export const styles = StyleSheet.create({
     fontFamily: "Lato-Regular",
     fontSize: 16,
   },
+  button: {
+    paddingTop: 10
+  }
 });

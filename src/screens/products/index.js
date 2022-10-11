@@ -1,22 +1,27 @@
-import React from "react";
-import { View, FlatList, Text } from "react-native";
+import React, { useEffect } from "react";
+import { FlatList } from "react-native";
 import { Items } from "../../components";
 import { styles } from "./styles";
-import { products } from "../../constants/data";
+import { useSelector, useDispatch } from "react-redux";
+import { filteredProducts, selectedProduct } from "../../store/actions";
 
-const Productos = ({ navigation, route }) => {
-  const data = products.filter(
-    (product) => route.params.id === product.categoryId
+const Productos = ({ navigation }) => {
+  const dispatch = useDispatch();
+  const selectedCategory = useSelector((state) => state.category.selected);
+  const productsFiltered = useSelector(
+    (state) => state.products.filteredProducts
   );
 
   const onSelected = (item) => {
+    dispatch(selectedProduct(item.id));
     navigation.navigate("Product", {
       title: item.title,
-      description: item.description,
-      price: item.price,
-      weight: item.weight,
     });
   };
+
+  useEffect(() => {
+    dispatch(filteredProducts(selectedCategory.id));
+  }, []);
 
   const renderItem = ({ item }) => (
     <Items item={item} onSelected={onSelected} />
@@ -24,7 +29,7 @@ const Productos = ({ navigation, route }) => {
 
   return (
     <FlatList
-      data={data}
+      data={productsFiltered}
       renderItem={renderItem}
       keyExtractor={(item) => item.id.toString()}
       style={styles.container}
