@@ -15,13 +15,10 @@ export const signUp = (email, password) => {
           password,
           returnSecureToken: true,
         }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Algo salió mal");
-      }
+      });      
 
       const data = await response.json();
+      console.log(data)
 
       dispatch({
         type: SIGN_UP,

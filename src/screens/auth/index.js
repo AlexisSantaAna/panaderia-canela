@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useReducer } from "react";
 import { useDispatch } from "react-redux";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Button,
-  TextInput,
-} from "react-native";
+import { View, Text, TouchableOpacity, Button, TextInput } from "react-native";
 import { styles } from "./style";
 import { colors } from "../../constants/themes/colors";
 import { signUp } from "../../store/actions/index";
+import { Input } from "../../components";
+
+const initialState = {
+  email: { value: "", error: "", touched: false, hasError: true },
+  password: { value: "", error: "", touched: false, hasError: true },
+  isFormValid: false,
+};
 
 const Auth = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -29,8 +30,8 @@ const Auth = ({ navigation }) => {
     <View style={styles.containerKeyboard}>
       <View style={styles.container}>
         <Text style={styles.title}>{title}</Text>
-        <Text style={styles.label}>Email</Text>
-        <TextInput
+        <Input
+          label={"Email"}
           style={styles.input}
           placeholderTextColor={colors.gray}
           placeholder="Ingrese su email"
@@ -39,9 +40,12 @@ const Auth = ({ navigation }) => {
           autoCapitalize="none"
           autoCorrect={false}
           onChangeText={(text) => setEmail(text)}
+          hasError={true}
+          error="Error capo"
+          touched={true}
         />
-        <Text style={styles.label}>Contraseña</Text>
-        <TextInput
+        <Input
+          label="Contraseña"
           style={styles.input}
           placeholderTextColor={colors.gray}
           placeholder="Ingrese su contraseña"
@@ -50,6 +54,9 @@ const Auth = ({ navigation }) => {
           autoCapitalize="none"
           autoCorrect={false}
           onChangeText={(text) => setPassword(text)}
+          hasError={true}
+          error="Error capo"
+          touched={true}
         />
         <View style={styles.buttonsContainer}>
           <Button

@@ -23,18 +23,6 @@ export const styles = StyleSheet.create({
     marginVertical: 5,
     textAlign: "center"
   },
-  label: {
-    fontSize: 14,
-    fontFamily: "Lato-Regular",
-  },
-  input: {
-    height: 40,
-    borderBottomColor: colors.primary,
-    borderBottomWidth: 1,
-    width: "90%",
-    fontFamily: "Lato-Regular",
-    marginBottom: 10
-  },
   promptButton: {
     alignItems: "center",
   },
