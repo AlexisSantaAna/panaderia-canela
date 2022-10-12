@@ -1,13 +1,14 @@
 //forma tradicional de usar redux, ahora hay un "redux toolkit"
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
-import { categoryReducer, productsReducer, cartReducer, ordersReducer } from "./reducers";
+import { categoryReducer, productsReducer, cartReducer, ordersReducer, authReducer } from "./reducers";
 
 const rootReducer = combineReducers({
     products: productsReducer,
     category: categoryReducer,
     cart: cartReducer,
-    orders: ordersReducer
+    orders: ordersReducer,
+    auth: authReducer
 })
 
 //estoy importando, combinando y exportando los reducers en un solo grupo 
