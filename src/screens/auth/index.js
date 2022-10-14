@@ -3,8 +3,9 @@ import { useDispatch } from "react-redux";
 import { View, Text, TouchableOpacity, Button, TextInput } from "react-native";
 import { styles } from "./style";
 import { colors } from "../../constants/themes/colors";
-import { signUp } from "../../store/actions/index";
+import { signIn, signUp } from "../../store/actions/index";
 import { Input } from "../../components";
+import { UPDATED_FORM, onInputChange, onFocusOut } from "../../constants/utils/forms";
 
 const initialState = {
   email: { value: "", error: "", touched: false, hasError: true },
@@ -12,18 +13,43 @@ const initialState = {
   isFormValid: false,
 };
 
+const formReducer = (state, action) => {
+  switch (action.type) {
+    case UPDATED_FORM:
+      const { name, value, hasError, error, touched, isFormValid } =
+        action.data;
+      return {
+        ...state,
+        [name]: {
+          ...state[name],
+          value,
+          hasError,
+          error,
+          touched,
+        },
+        isFormValid,
+      };
+    default:
+      return state;
+  }
+};
+
 const Auth = ({ navigation }) => {
   const dispatch = useDispatch();
   const [isLogin, setIsLogin] = useState(true);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  //Estado global con todas las validaciones del formulario.
+  const [formState, dispatchFormState] = useReducer(formReducer, initialState);
 
-  const title = isLogin ? "Iniciar sesión" : "Registro";
+  const title = isLogin ? "Login" : "Registro";
   const message = isLogin ? "¿No tienes cuenta?" : "¿Ya tienes cuenta?";
   const messageAction = isLogin ? "Ingresar" : "Registrarse";
 
   const onHandleSubmit = () => {
-    dispatch(signUp(email, password));
+    dispatch(isLogin ? signIn(formState.email.value, formState.password.value) : signUp(formState.email.value, formState.password.value));
+  };
+
+  const onHandleChange = (value, type) => {
+    onInputChange(type, value, dispatchFormState, formState)
   };
 
   return (
@@ -31,39 +57,39 @@ const Auth = ({ navigation }) => {
       <View style={styles.container}>
         <Text style={styles.title}>{title}</Text>
         <Input
-          label={"Email"}
+          label="Email"
           style={styles.input}
           placeholderTextColor={colors.gray}
           placeholder="Ingrese su email"
-          value={email}
+          value={formState.email.value}
           keyboardType="email-address"
           autoCapitalize="none"
           autoCorrect={false}
-          onChangeText={(text) => setEmail(text)}
-          hasError={true}
-          error="Error capo"
-          touched={true}
+          onChangeText={(text) => onHandleChange(text, "email")}
+          hasError={formState.email.hasError}
+          error={formState.email.error}
+          touched={formState.email.touched}
         />
         <Input
-          label="Contraseña"
+          label="Password"
           style={styles.input}
           placeholderTextColor={colors.gray}
           placeholder="Ingrese su contraseña"
-          value={password}
+          value={formState.password.value}
           secureTextEntry={true}
           autoCapitalize="none"
           autoCorrect={false}
-          onChangeText={(text) => setPassword(text)}
-          hasError={true}
-          error="Error capo"
-          touched={true}
+          onChangeText={(text) => onHandleChange(text, "password")}
+          hasError={formState.password.hasError}
+          error={formState.password.error}
+          touched={formState.password.touched}
         />
         <View style={styles.buttonsContainer}>
           <Button
             title={messageAction}
             color={colors.primary}
             onPress={onHandleSubmit}
-            disabled={!email || !password}
+            disabled={!formState.isFormValid}
           />
           <TouchableOpacity style={styles.promptButton}>
             <Text
